@@ -13,25 +13,32 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ComponentMessageImport } from './routes/component/message'
+import { Route as ComponentCalendarImport } from './routes/component/calendar'
 
 // Create Virtual Routes
 
-const AboutLazyImport = createFileRoute('/about')()
 const IndexLazyImport = createFileRoute('/')()
 
 // Create/Update Routes
-
-const AboutLazyRoute = AboutLazyImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRoute,
-} as any).lazy(() => import('./routes/about.lazy').then((d) => d.Route))
 
 const IndexLazyRoute = IndexLazyImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
+
+const ComponentMessageRoute = ComponentMessageImport.update({
+  id: '/component/message',
+  path: '/component/message',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ComponentCalendarRoute = ComponentCalendarImport.update({
+  id: '/component/calendar',
+  path: '/component/calendar',
+  getParentRoute: () => rootRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -44,11 +51,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyImport
       parentRoute: typeof rootRoute
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutLazyImport
+    '/component/calendar': {
+      id: '/component/calendar'
+      path: '/component/calendar'
+      fullPath: '/component/calendar'
+      preLoaderRoute: typeof ComponentCalendarImport
+      parentRoute: typeof rootRoute
+    }
+    '/component/message': {
+      id: '/component/message'
+      path: '/component/message'
+      fullPath: '/component/message'
+      preLoaderRoute: typeof ComponentMessageImport
       parentRoute: typeof rootRoute
     }
   }
@@ -58,37 +72,42 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
+  '/component/calendar': typeof ComponentCalendarRoute
+  '/component/message': typeof ComponentMessageRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
+  '/component/calendar': typeof ComponentCalendarRoute
+  '/component/message': typeof ComponentMessageRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
-  '/about': typeof AboutLazyRoute
+  '/component/calendar': typeof ComponentCalendarRoute
+  '/component/message': typeof ComponentMessageRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths: '/' | '/component/calendar' | '/component/message'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to: '/' | '/component/calendar' | '/component/message'
+  id: '__root__' | '/' | '/component/calendar' | '/component/message'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
-  AboutLazyRoute: typeof AboutLazyRoute
+  ComponentCalendarRoute: typeof ComponentCalendarRoute
+  ComponentMessageRoute: typeof ComponentMessageRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
-  AboutLazyRoute: AboutLazyRoute,
+  ComponentCalendarRoute: ComponentCalendarRoute,
+  ComponentMessageRoute: ComponentMessageRoute,
 }
 
 export const routeTree = rootRoute
@@ -102,14 +121,18 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/about"
+        "/component/calendar",
+        "/component/message"
       ]
     },
     "/": {
       "filePath": "index.lazy.tsx"
     },
-    "/about": {
-      "filePath": "about.lazy.tsx"
+    "/component/calendar": {
+      "filePath": "component/calendar.tsx"
+    },
+    "/component/message": {
+      "filePath": "component/message.tsx"
     }
   }
 }

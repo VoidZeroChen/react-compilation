@@ -1,8 +1,7 @@
-import { createRootRoute } from '@tanstack/react-router';
-
+import Content from '@/components/layout/Content';
 import Header from '@/components/layout/Header';
 import Sider from '@/components/layout/Sider';
-import Content from '@/components/layout/Content';
+import { createRootRoute } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   component: () => (
