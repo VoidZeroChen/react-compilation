@@ -35,7 +35,7 @@ export default function MonthCalendar(props: MonthCalendarProps) {
         const item = days[i * 7 + j];
         row[j] = (
           <div
-            className={`flex-[1] h-[80px] border-[1px] border-solid border-[#eee] p-[10px] overflow-hidden ${item.currentMonth ? 'text-[#000]' : 'text-[#ccc]'}`}
+            className={`flex-[1] h-[80px] border-[1px] border-solid border-[#eee] p-[10px] overflow-hidden cursor-pointer ${item.currentMonth ? 'text-[#000]' : 'text-[#ccc]'}`}
             key={String(i) + String(j)}
             onClick={() => selectHandler?.(item.date)}
           >
@@ -44,13 +44,11 @@ export default function MonthCalendar(props: MonthCalendarProps) {
             ) : (
               <div className="p-[10px]">
                 <div
-                  className={`calendar-month-body-cell-date-value ${value?.format('YYYY-MM-DD') === item.date?.format('YYYY-MM-DD') ? 'bg-[blue] w-[28px] h-[28px] leading-[28px] text-center text-[#fff] rounded-[50%] cursor-pointer' : ''} }`}
+                  className={`${value?.format('YYYY-MM-DD') === item.date?.format('YYYY-MM-DD') ? 'bg-[blue] w-[28px] h-[28px] leading-[28px] text-center text-[#fff] rounded-[50%]' : ''} }`}
                 >
                   {item.date.date()}
                 </div>
-                <div className="calendar-month-body-cell-date-content">
-                  {dateInnerContent?.(item.date)}
-                </div>
+                <div>{dateInnerContent?.(item.date)}</div>
               </div>
             )}
           </div>

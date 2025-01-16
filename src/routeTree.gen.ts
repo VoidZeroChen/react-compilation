@@ -13,7 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as ComponentMessageImport } from './routes/component/message'
+import { Route as ComponentSpaceImport } from './routes/component/space'
 import { Route as ComponentCalendarImport } from './routes/component/calendar'
 
 // Create Virtual Routes
@@ -28,9 +28,9 @@ const IndexLazyRoute = IndexLazyImport.update({
   getParentRoute: () => rootRoute,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route))
 
-const ComponentMessageRoute = ComponentMessageImport.update({
-  id: '/component/message',
-  path: '/component/message',
+const ComponentSpaceRoute = ComponentSpaceImport.update({
+  id: '/component/space',
+  path: '/component/space',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -58,11 +58,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentCalendarImport
       parentRoute: typeof rootRoute
     }
-    '/component/message': {
-      id: '/component/message'
-      path: '/component/message'
-      fullPath: '/component/message'
-      preLoaderRoute: typeof ComponentMessageImport
+    '/component/space': {
+      id: '/component/space'
+      path: '/component/space'
+      fullPath: '/component/space'
+      preLoaderRoute: typeof ComponentSpaceImport
       parentRoute: typeof rootRoute
     }
   }
@@ -73,41 +73,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute
   '/component/calendar': typeof ComponentCalendarRoute
-  '/component/message': typeof ComponentMessageRoute
+  '/component/space': typeof ComponentSpaceRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute
   '/component/calendar': typeof ComponentCalendarRoute
-  '/component/message': typeof ComponentMessageRoute
+  '/component/space': typeof ComponentSpaceRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexLazyRoute
   '/component/calendar': typeof ComponentCalendarRoute
-  '/component/message': typeof ComponentMessageRoute
+  '/component/space': typeof ComponentSpaceRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/component/calendar' | '/component/message'
+  fullPaths: '/' | '/component/calendar' | '/component/space'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/component/calendar' | '/component/message'
-  id: '__root__' | '/' | '/component/calendar' | '/component/message'
+  to: '/' | '/component/calendar' | '/component/space'
+  id: '__root__' | '/' | '/component/calendar' | '/component/space'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute
   ComponentCalendarRoute: typeof ComponentCalendarRoute
-  ComponentMessageRoute: typeof ComponentMessageRoute
+  ComponentSpaceRoute: typeof ComponentSpaceRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ComponentCalendarRoute: ComponentCalendarRoute,
-  ComponentMessageRoute: ComponentMessageRoute,
+  ComponentSpaceRoute: ComponentSpaceRoute,
 }
 
 export const routeTree = rootRoute
@@ -122,7 +122,7 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/component/calendar",
-        "/component/message"
+        "/component/space"
       ]
     },
     "/": {
@@ -131,8 +131,8 @@ export const routeTree = rootRoute
     "/component/calendar": {
       "filePath": "component/calendar.tsx"
     },
-    "/component/message": {
-      "filePath": "component/message.tsx"
+    "/component/space": {
+      "filePath": "component/space.tsx"
     }
   }
 }

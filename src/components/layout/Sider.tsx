@@ -8,10 +8,10 @@ export default function Sider() {
           <summary>组件</summary>
           <ul>
             <li>
-              <Link to='/component/calendar'>日历</Link>
+              <Link to="/component/calendar">日历</Link>
             </li>
             <li>
-              <Link to='/component/message'>消息提示</Link>
+              <Link to="/component/space">间距</Link>
             </li>
           </ul>
         </details>
@@ -42,6 +42,6 @@ export default function Sider() {
           </ul>
         </details>
       </li>
-    </ul >
+    </ul>
   );
 }
